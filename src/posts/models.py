@@ -24,11 +24,11 @@ class Post(models.Model):
     overview = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     comment_count = models.IntegerField(default=0)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     thumbnail = models.ImageField()
-
-    categories = models.ManyToManyField(Category)
     featured = models.BooleanField()
+
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    categories = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.title

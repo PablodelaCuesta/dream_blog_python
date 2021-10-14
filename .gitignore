@@ -1,3 +1,6 @@
 *.txt
 */static/*
 __pycache__
+*.jpg
+*.sqlite3
+src/db.sqlite3
