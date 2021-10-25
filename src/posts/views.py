@@ -1,9 +1,25 @@
-from django.db.models import query, Count
+from django.db.models import query, Count, Q
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post
 from mail.models import Signup
 
+
+def search(request):
+    queryset = Post.objects.all()
+    query = request.GET.get('q')
+
+    if query:
+        queryset = queryset.filter(
+            Q(title__icontains=query) |
+            Q(overview__icontains=query)
+        ).distinct()
+
+    context = {
+        'queryset': queryset
+    }
+
+    return render(request, 'search_result.html', context)
 
 def get_category_count():
     queryset = Post.objects\
@@ -57,8 +73,13 @@ def blog(request):
 
 def post(request, id):
     post = get_object_or_404(Post, id=id)
+    most_recent = Post.objects.order_by('-timestamp')[:3]
+    category_count = get_category_count()
+
     context = {
-        'post': post
+        'post': post,
+        'most_recent': most_recent,
+        'category_count': category_count        
     }
     return render(request, 'post.html', context)
 
