@@ -3,7 +3,7 @@
 {% block content %}
 
   <!-- Hero Section-->
-  <section style="background: url({% static 'img/hero.jpg' %}); background-size: cover; background-position: center center" class="hero">
+  <!-- <section style="background: url({% static 'img/hero.jpg' %}); background-size: cover; background-position: center center" class="hero">
     <div class="container">
       <div class="row">
         <div class="col-lg-7">
@@ -11,7 +11,44 @@
         </div>
       </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
     </div>
+  </section> -->
+
+  <section>
+    <div class="bannerSection">
+      <div class="container">
+        <div class="row g-4 g-md-3  align-items-center">
+          <div class="col-md-auto order-md-last">
+            <div class="bannerUserImg">
+              <img src="{% static 'img/avatar-2.jpg' %}" alt="...">
+            </div>
+          </div>
+
+          <div class="col-md">
+
+            <div class="bannerContent">
+              <h1 class="xlTitle pb-3">Hi, I’m Pablo, <br> Software engineer </h1>
+              <p>Alguna descripción aquí</p>
+
+              <div class="bannerBtnCol">
+                <div class="row">
+                  <div class="col-auto">
+                    <a download href="javascript:void(0)" class="btnCustom btnPrimary">Download Resume</a>
+                  </div>
+                  <div class="col-auto">
+                    <a href="contact.html" class="btnCustom btnOutline">Contact</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
   </section>
+
+
   <!-- Intro Section-->
   <section class="intro">
     <div class="container">

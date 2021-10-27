@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'posts',
     'mail',
 
-    # tiny
+    # third party packages
     'tinymce',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'

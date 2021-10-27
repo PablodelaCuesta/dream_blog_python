@@ -1,9 +1,18 @@
 from django.db.models import query, Count, Q
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Post
+from django.urls.base import reverse
+
+from posts.forms import PostForm
+from .models import Post, Author
 from mail.models import Signup
 
+def get_author(user):
+    qs = Author.objects.filter(user=user)
+
+    if qs.exists():
+        return qs[0]
+    return None
 
 def search(request):
     queryset = Post.objects.all()
@@ -71,6 +80,9 @@ def blog(request):
     }
     return render(request, 'blog.html', context)
 
+def contact(request):
+    return render(request, 'contact.html', {})
+
 def post(request, id):
     post = get_object_or_404(Post, id=id)
     most_recent = Post.objects.order_by('-timestamp')[:3]
@@ -83,3 +95,26 @@ def post(request, id):
     }
     return render(request, 'post.html', context)
 
+def post_create(request):
+    form = PostForm(request.POST or None, request.FILES or None)
+    author = get_author(request.user)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.instance.author = author
+            form.save()
+            return redirect(reverse('post-detail', kwargs={
+                'id': form.instance.id
+            }))
+    
+    context = {
+        'form': form
+    }
+
+    return render(request, "post_create.html", context)
+
+def post_update(request):
+    pass
+
+def post_delete(request):
+    pass
