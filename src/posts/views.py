@@ -4,8 +4,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls.base import reverse
 
 from posts.forms import PostForm
-from .models import Post, Author
+from .models import Post, Author, PostView
 from mail.models import Signup
+
+from helpers.client_info import get_client_ip
 
 def get_author(user):
     qs = Author.objects.filter(user=user)
@@ -35,6 +37,19 @@ def get_category_count():
         .values('categories__title')\
         .annotate(Count('categories__title'))
     return queryset
+
+def increase_views(request, post: Post):
+    """
+    Increase the counter of views for a specific Post and IP
+
+    TODO: Issue 01 implement
+    """
+    # Looking for IP address
+    postviewers = PostView.objects.filter( ip == request.META.get('REMOTE_ADDR') )
+
+    # if postviewers:
+    #     postviewers.
+    pass
 
 def index(request):
     featured = Post.objects.filter(featured=True)
@@ -85,6 +100,12 @@ def contact(request):
 
 def post(request, id):
     post = get_object_or_404(Post, id=id)
+
+    # TODO: Implement issue
+    # Increase the number of views
+    # if request.method == 'GET':
+    #     increase_views(request, post)
+
     most_recent = Post.objects.order_by('-timestamp')[:3]
     category_count = get_category_count()
 
