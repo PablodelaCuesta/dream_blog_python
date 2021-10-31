@@ -62,61 +62,8 @@
   </section>
 
 
-  <section class="featured-posts no-padding-top">
-    <div class="container">
 
-      {% for object in object_list %}
 
-      <div class="row d-flex align-items-stretch">
-        {% if not forloop.first and not forloop.last %}
-          <div class="image col-lg-5"><img src="{{ object.thumbnail.url }}" alt="..."></div>
-        {% endif %}
-        <div class="text col-lg-7">
-          <div class="text-inner d-flex align-items-center">
-            <div class="content">
-              <header class="post-header">
-                <div class="category">
-                  {% for category in object.categories.all %}
-  
-                  <a href="#"> {{ category }}</a>
-
-                  {% endfor %}
-                </div>
-                <a href="post/{{object.title}}">
-                  <h2 class="h4"> {{ object.title }} </h2>
-                </a>
-              </header>
-              <p> {{ object.overview }} </p>
-              <footer class="post-footer d-flex align-items-center">
-                <a href="#" class="author d-flex align-items-center flex-wrap">
-                  <div class="avatar"><img src="{{ object.author.profile_picture.url }}" alt="img" class="img-fluid"></div>
-                  <div class="title"><span> {{ object.author }} </span></div>
-                </a>
-                <div class="date"><i class="icon-clock"></i> {{ object.timestamp }} </div>
-                <div class="comments"><i class="icon-comment"></i>{{ object.comment_count }}</div>
-              </footer>
-            </div>
-          </div>
-        </div>
-        {% if forloop.first or forloop.last %}
-          <div class="image col-lg-5"><img src="{{ object.thumbnail.url }}" alt="..."></div>
-        {% endif %}
-      </div>
-
-      {% endfor %}
-
-    </div>
-  </section>
-  <!-- Divider Section-->
-  <section style="background: url({% static 'img/divider-bg.jpg' %}); background-size: cover; background-position: center bottom" class="divider">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7">
-          <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h2><a href="#" class="hero-link">View More</a>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- Latest Posts -->
   <section class="latest-posts"> 
     <div class="container">

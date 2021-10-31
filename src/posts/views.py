@@ -28,7 +28,7 @@ def search(request):
         'queryset': queryset
     }
 
-    return render(request, 'search_result.html', context)
+    return render(request, 'shared/search_result.html', context)
 
 def get_category_count():
     queryset = Post.objects\
@@ -93,7 +93,7 @@ def post(request, id):
         'most_recent': most_recent,
         'category_count': category_count        
     }
-    return render(request, 'post.html', context)
+    return render(request, 'post/post.html', context)
 
 def post_create(request):
     form = PostForm(request.POST or None, request.FILES or None)
