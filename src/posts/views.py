@@ -52,21 +52,21 @@ def increase_views(request, post: Post):
     pass
 
 def index(request):
-    featured = Post.objects.filter(featured=True)
     latests = Post.objects.order_by('-timestamp')[0:3]
+    author = Author.objects.first()
 
     if request.method == 'POST':
         
         # TODO: We need validation
-
         email = request.POST['email']
         new_signup = Signup()
         new_signup.email = email
         new_signup.save()
 
     context = {
-        'object_list': featured,
-        'object_latest': latests
+        'author': author,    
+        'object_latest': latests,
+        'len_object_latest': len(latests)
     }
     return render(request, 'index.html', context)
 
@@ -139,3 +139,7 @@ def post_update(request):
 
 def post_delete(request):
     pass
+
+
+
+
